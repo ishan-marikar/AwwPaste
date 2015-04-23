@@ -24,10 +24,10 @@
     if ( isset( $_POST[ 'text' ] ) ) {
         $text = $_POST[ 'text' ];
         if ( !empty( $text ) ) {
-            $pasteDetails = AwwCore::CreatePaste ( $text );
-            if ( !empty( $pasteDetails ) ) {
+            $pasteDeleteKey = AwwCore::CreatePaste ( $text );
+            if ( !empty( $pasteDeleteKey ) ) {
                 $isPaste = true;
-                $redirectUrl = "./?id=" . $pasteDetails[ 'pasteID' ];
+                $redirectUrl = "./?id=" . $pasteDeleteKey[ 'pasteID' ];
                 header ( "Location: " . $redirectUrl );
 
             } else {
@@ -56,7 +56,8 @@
     } else if ( isset( $_GET[ 'id' ] ) ) {
         $pasteID = $_GET[ 'id' ];
         $pasteText = AwwCore::GetPaste ( $pasteID );
-        $pasteDetails = AwwCore::GetPasteDetails ( $pasteID );
+        $pasteDeleteKey = AwwCore::GetDeleteKey ( $pasteID );
+        $pasteTime = AwwCore::GetTime($pasteID);
 
         if ( !empty( $pasteText ) ) {
             $isPaste = true;
@@ -90,6 +91,8 @@
     <?php if ( $isPaste ) { ?>
     <link rel='stylesheet' href='./public/css/default.min.css'>
     <script src='./public/js/highlight.min.js'></script>
+    <script src='./public/js/jquery-1.11.2.min.js'></script>
+    <script src='./public/js/jquery.timeago.js'></script>
     <script>hljs.initHighlightingOnLoad();</script>
 <?php } ?>
         <script src='./public/js/autosize.min.js'></script>
@@ -102,9 +105,10 @@
         // http://smile.sh/awwbin/?id=12345
         $urlRaw = "./?id=" . $pasteID . "&raw=true";
         // http://smile.sh/awwbin/?id=12345&raw=true
-        $urlDelete = "./?id=" . $pasteID . "&delete_key=" . $pasteDetails;
+        $urlDelete = "./?id=" . $pasteID . "&delete_key=" . $pasteDeleteKey;
         // http://smile.sh/awwbin/?id=12345&delete_key=a1b2c3d4e5
         ?>
+        <p>This paste was created <time class="timeago" datetime="<?php print $pasteTime; ?>">N/A</time></p>
         <div class='code'>
             <pre><code><?php print ( $pasteText ); ?></code></pre>
         </div>

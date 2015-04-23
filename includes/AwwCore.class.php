@@ -47,9 +47,11 @@
             // TODO: Offload sanitization into a method
             $fileContents = htmlspecialchars ( $fileContents );
 
+            $currentTime = date('Y-m-d\TH:i:s');
             // Create the JSON file that will store the deletion key
             $fileInfo = array (
-                "delKey" => $deleteKey
+                "delKey" => $deleteKey,
+                "time" => $currentTime
             );
             $pasteInfoContents = json_encode ( $fileInfo );
 
@@ -100,7 +102,7 @@
             }
         }
 
-        public static function GetPasteDetails ( $pasteId )
+        public static function GetDeleteKey ( $pasteId )
         {
             $pasteInfoFilename = PASTE_PATH . $pasteId . ".json";
             if ( file_exists ( $pasteInfoFilename ) ) {
@@ -108,6 +110,19 @@
                 $deleteKey = $meta->{'delKey'};
 
                 return $deleteKey;
+            } else {
+                return false;
+            }
+        }
+
+        public static function GetTime ( $pasteId )
+        {
+            $pasteInfoFilename = PASTE_PATH . $pasteId . ".json";
+            if ( file_exists ( $pasteInfoFilename ) ) {
+                $meta = json_decode ( file_get_contents ( $pasteInfoFilename ) );
+                $time = $meta->{'time'};
+
+                return $time;
             } else {
                 return false;
             }
