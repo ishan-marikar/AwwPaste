@@ -88,8 +88,8 @@
 
         <!-- Load the syntax highlighter -->
     <?php if ( $isPaste ) { ?>
-    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css'>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js'></script>
+    <link rel='stylesheet' href='./public/css/default.min.css'>
+    <script src='./public/js/highlight.min.js'></script>
     <script>hljs.initHighlightingOnLoad();</script>
 <?php } ?>
         <script src='./public/js/autosize.min.js'></script>
