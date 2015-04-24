@@ -88,12 +88,13 @@
         <link rel='stylesheet' href='public/css/styles.css'>
 
         <!-- Load the syntax highlighter -->
-    <?php if ( $isPaste ) { ?>
-    <link rel='stylesheet' href='./public/css/default.min.css'>
-    <script src='./public/js/highlight.min.js'></script>
-    <script src='./public/js/jquery-1.11.2.min.js'></script>
-    <script src='./public/js/jquery.timeago.js'></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+
+        <script src='./public/js/jquery-1.11.2.min.js'></script>
+        <?php if ( $isPaste ) { ?>
+        <link rel='stylesheet' href='./public/css/default.min.css'>
+        <script src='./public/js/highlight.min.js'></script>
+        <script src='./public/js/jquery.timeago.js'></script>
+        <script>hljs.initHighlightingOnLoad();</script>
 <?php } ?>
         <script src='./public/js/autosize.min.js'></script>
         <script src='./public/js/scripts.js'></script>
